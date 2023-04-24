@@ -53,6 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Collector from Collections" href="07-collector.html" />
     <link rel="prev" title="The Filter Function" href="05-filter.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -121,6 +122,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Generators
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07-collector.html">
+   Collector from Collections
   </a>
  </li>
 </ul>
@@ -254,6 +260,16 @@ const thebe_selector_output = ".output, .cell_output"
    Example: Analyzing Literary Works
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#accessing-the-generator-data-with-next">
+   Accessing the Generator Data with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     next()
+    </span>
+   </code>
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -292,6 +308,16 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#example-analyzing-literary-works">
    Example: Analyzing Literary Works
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#accessing-the-generator-data-with-next">
+   Accessing the Generator Data with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     next()
+    </span>
+   </code>
   </a>
  </li>
 </ul>
@@ -372,60 +398,36 @@ question
 </div>
 </div>
 </div>
-<p>Next, create a function to process the lines and count word frequency:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
-
-<span class="k">def</span> <span class="nf">count_words</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
-    <span class="n">word_counts</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-
-    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">read_book_line_by_line</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
-        <span class="n">words</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
-            <span class="n">word_counts</span><span class="p">[</span><span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span> <span class="o">+=</span> <span class="mi">1</span>
-
-    <span class="k">return</span> <span class="n">word_counts</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shakespeare</span> <span class="o">=</span> <span class="n">read_book_line_by_line</span><span class="p">(</span><span class="s2">&quot;../data/shakespeare.txt&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Now that we have our functions set up, we can use them to analyze “War and Peace” (or any other large text file) and get the word frequencies. First, download the text file of “War and Peace” from a source like Project Gutenberg and save it to your local machine. Then, call the <code class="docutils literal notranslate"><span class="pre">count_words()</span></code> function with the file path:</p>
+</div>
+<div class="section" id="accessing-the-generator-data-with-next">
+<h2>Accessing the Generator Data with <code class="docutils literal notranslate"><span class="pre">next()</span></code><a class="headerlink" href="#accessing-the-generator-data-with-next" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">next()</span></code> function is a built-in Python function that allows you to manually retrieve the next item from a generator. When you call <code class="docutils literal notranslate"><span class="pre">next()</span></code> with a generator as its argument, the generator function runs until it encounters the yield keyword, at which point it returns the value specified after the <code class="docutils literal notranslate"><span class="pre">yield</span></code>. The next time you call next() on the same generator, it continues executing from where it left off, retaining its previous state and any local variables.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_path</span> <span class="o">=</span> <span class="s2">&quot;../data/shakespeare.txt&quot;</span>
-<span class="n">word_counts</span> <span class="o">=</span> <span class="n">count_words</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>You can now access the word frequencies using the <code class="docutils literal notranslate"><span class="pre">word_counts</span></code> dictionary. For example, you can print the 10 most frequent words:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
-
-<span class="n">sorted_word_counts</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">word_counts</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">sorted_word_counts</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">shakespeare</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">shakespeare</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">shakespeare</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>the: 27549
-and: 26037
-i: 19540
-to: 18700
-of: 18010
-a: 14383
-my: 12455
-in: 10671
-you: 10630
-that: 10487
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1609
+
+THE SONNETS
+
+by William Shakespeare
 </pre></div>
 </div>
 </div>
 </div>
+<p>Here, we are not loading the entire book into memory, rather we are loading merely a single line at a time. This means that if we are using a computer with low amounts of memory, we can work with larger amounts of data without overloading the system hardware.</p>
 </div>
 </div>
 
@@ -460,6 +462,13 @@ that: 10487
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">The Filter Function</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="07-collector.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Collector from Collections</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             
