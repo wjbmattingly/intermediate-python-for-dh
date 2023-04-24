@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Enumerate in Python: A Tutorial for Humanists and Beginners
+# # The Enumerate in Python
 
 # In this tutorial, we will explore the `enumerate()` function in Python, which is a valuable tool for working with sequences like lists, tuples, and strings. This tutorial is designed for humanists and those new to Python, so we'll use simple examples with strings to help you understand the concept.
 # 

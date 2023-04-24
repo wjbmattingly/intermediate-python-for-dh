@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Python Map Function Tutorial: Working with Strings
+# # The Map Function
 # 
 # This tutorial will introduce you to the map() function in Python, with a focus on working with strings. We'll use examples from Edgar Allan Poe's works to demonstrate the concepts in a manner that is relevant to humanists.
 # 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # The Zip Function in Python: A Tutorial for Humanists and Beginners
+# # The Zip Function in Python
 # 
 # In this tutorial, we'll explore the zip() function in Python, which is a useful tool for working with multiple sequences, a category of data structure that includes lists, tuples, or strings. This tutorial is designed for humanists and those new to Python, so we'll use simple examples to help you understand the concept.
 # 

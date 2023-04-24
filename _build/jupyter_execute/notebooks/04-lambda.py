@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Lambda Functions for Humanists: A Beginner's Tutorial
+# # Lambda Functions
 # 
 # Lambda functions are a powerful yet simple feature in many programming languages that can help you write concise and elegant code. This tutorial is designed for humanists with little to no programming experience, and we will use examples from literature to demonstrate the usefulness of lambda functions.
 # 
