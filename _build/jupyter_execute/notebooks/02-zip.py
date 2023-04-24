@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # The Zip Function in Python
+# # The Zip Function
 # 
 # In this tutorial, we'll explore the zip() function in Python, which is a useful tool for working with multiple sequences, a category of data structure that includes lists, tuples, or strings. This tutorial is designed for humanists and those new to Python, so we'll use simple examples to help you understand the concept.
 # 
 # Like `enumerate()`, there are other ways to produce the same results as `zip()`. Also like `enumerate()`, `zip()` significantly reduces the amount of code you need to write to perform those same actions. You will likely encounter `zip()` when reading code from colleagues or in online tutorials. Often, you will not see it explained or described. Because of this, it can be useful to learn about `zip()` early in your Python career.
+# 
+# <center><iframe width="560" height="315" src="https://www.youtube.com/embed/Ek49cGiAOwo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></center>
 # 
 # ## What is the `zip()` function?
 # 
