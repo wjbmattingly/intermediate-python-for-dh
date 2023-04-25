@@ -70,6 +70,13 @@ lines = [
 
 
 line_lengths = map(len, lines)
+line_lengths
+
+
+# At this stage, we have a generator. To learn about generators and why they are important, check out the generator section of this textbook. We can convert this generator into a list and the print it off.
+
+# In[3]:
+
 
 # Convert the map object to a list
 line_lengths_list = list(line_lengths)
