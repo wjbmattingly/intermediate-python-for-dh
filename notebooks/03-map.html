@@ -513,11 +513,13 @@ document.write(`
 <section id="using-custom-functions-with-map">
 <h2>Using custom functions with map()<a class="headerlink" href="#using-custom-functions-with-map" title="Permalink to this heading">#</a></h2>
 <p>Now let’s create a custom function to count number of words in each line with split. We’ll use this function with the <code class="docutils literal notranslate"><span class="pre">map()</span></code> function.</p>
-<p>First, let’s create the custom function:</p>
+<p>First, let’s create the custom function. The purpose of this function is to count the number of words in the line by first splitting the line at any white space. Next, it leverages the <code class="docutils literal notranslate"><span class="pre">len()</span></code> function to count the number of words. It then returns the result</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">count_words</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">num_words</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">num_words</span>
 </pre></div>
 </div>
 </div>
