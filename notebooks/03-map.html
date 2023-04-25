@@ -404,6 +404,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-map-function">What is the <code class="docutils literal notranslate"><span class="pre">map()</span></code> function?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-usage-of-the-map-function-with-strings">Basic usage of the map() function with strings</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-custom-functions-with-map">Using custom functions with map()</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#live-coding">Live Coding</a></li>
 </ul>
             </nav>
         </div>
@@ -417,7 +418,8 @@ document.write(`
                   
   <section id="the-map-function">
 <h1>The Map Function<a class="headerlink" href="#the-map-function" title="Permalink to this heading">#</a></h1>
-<p>This tutorial will introduce you to the map() function in Python, with a focus on working with strings. We’ll use examples from Edgar Allan Poe’s works to demonstrate the concepts in a manner that is relevant to humanists.</p>
+<p>This tutorial will introduce you to the <code class="docutils literal notranslate"><span class="pre">map()</span></code> function in Python, with a focus on working with strings. We’ll use examples from Edgar Allan Poe’s works to demonstrate the concepts in a manner that is relevant to humanists.</p>
+<center><iframe width="560" height="315" src="https://www.youtube.com/embed/tb5edLIe6Uw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></center>
 <section id="example-of-a-problem">
 <h2>Example of a Problem<a class="headerlink" href="#example-of-a-problem" title="Permalink to this heading">#</a></h2>
 <p>Imagine we wanted to count the length of every line in Edgar Allan Poe’s famous poem, “The Raven.” Let’s try and solve this problem. First, let’s create a list containing a few lines from the poem:</p>
@@ -487,7 +489,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;map at 0x218e7dd0c70&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;map at 0x218e8251f40&gt;
 </pre></div>
 </div>
 </div>
@@ -541,6 +543,86 @@ document.write(`
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">map()</span></code> function has applied our custom <code class="docutils literal notranslate"><span class="pre">count_words()</span></code> function to each line in the list, and the results have been returned in a new list.</p>
 <p>Often, when we use <code class="docutils literal notranslate"><span class="pre">map()</span></code>, we use it alongside <code class="docutils literal notranslate"><span class="pre">lambda</span></code> functions. We will meet those in the next tutorial.</p>
+</section>
+<section id="live-coding">
+<h2>Live Coding<a class="headerlink" href="#live-coding" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lines</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Once upon a midnight dreary, while I pondered, weak and weary,&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Over many a quaint and curious volume of forgotten lore—&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;While I nodded, nearly napping, suddenly there came a tapping,&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;As of some one gently rapping, rapping at my chamber door.&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lengths</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+    <span class="c1"># print(line)</span>
+    <span class="c1"># print(line.split())</span>
+    <span class="n">lengths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lengths</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[11, 10, 10, 11]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_lengths</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+    
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lengths2</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">get_lengths</span><span class="p">,</span> <span class="n">lines</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lengths2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;map at 0x218e7f123a0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lengths_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">lengths2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lengths_list</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[11, 10, 10, 11]
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -615,6 +697,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-map-function">What is the <code class="docutils literal notranslate"><span class="pre">map()</span></code> function?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-usage-of-the-map-function-with-strings">Basic usage of the map() function with strings</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-custom-functions-with-map">Using custom functions with map()</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#live-coding">Live Coding</a></li>
 </ul>
   </nav></div>
 
