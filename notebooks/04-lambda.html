@@ -400,13 +400,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-lambda-functions">What are lambda functions?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-lambda-functions">What are Lambda Functions?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-syntax">Basic syntax</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-lambda-functions-with-our-example-lines">Using lambda functions with our example lines</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-counting-words-in-each-line">Example 1: Counting words in each line</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-sorting-lines-by-length">Example 2: Sorting lines by length</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#live-coding">Live Coding</a></li>
 </ul>
             </nav>
         </div>
@@ -422,8 +423,8 @@ document.write(`
 <h1>Lambda Functions<a class="headerlink" href="#lambda-functions" title="Permalink to this heading">#</a></h1>
 <p>Lambda functions are a powerful yet simple feature in many programming languages that can help you write concise and elegant code. This tutorial is designed for humanists with little to no programming experience, and we will use examples from literature to demonstrate the usefulness of lambda functions.</p>
 <section id="what-are-lambda-functions">
-<h2>What are lambda functions?<a class="headerlink" href="#what-are-lambda-functions" title="Permalink to this heading">#</a></h2>
-<p>Lambda functions are small, anonymous functions that can be created and used on-the-fly without needing a formal function definition. In simpler terms, they are one-liner functions that don’t need a name.
+<h2>What are Lambda Functions?<a class="headerlink" href="#what-are-lambda-functions" title="Permalink to this heading">#</a></h2>
+<p>Lambda functions are small, <strong>anonymous functions</strong> that can be created and used on-the-fly without needing a formal function definition. In simpler terms, they are one-liner functions that don’t need a name.
 Why are lambda functions useful?</p>
 <ul class="simple">
 <li><p>They allow for more concise and readable code.</p></li>
@@ -438,11 +439,26 @@ Why are lambda functions useful?</p>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">lambda</span></code> keyword is followed by a list of arguments, a colon, and a single expression that the function will return.</p>
-<p>For example, let’s say we have a simple function that adds two numbers:</p>
+<p>For example, let’s say we have a simple function that combines a first name and a last name with a space:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_name</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first_name</span> <span class="o">=</span> <span class="s2">&quot;William&quot;</span>
+<span class="n">last_name</span> <span class="o">=</span> <span class="s2">&quot;Mattingly&quot;</span>
+<span class="n">full_name</span> <span class="o">=</span> <span class="n">add_name</span><span class="p">(</span><span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">full_name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>William Mattingly
 </pre></div>
 </div>
 </div>
@@ -450,7 +466,21 @@ Why are lambda functions useful?</p>
 <p>We can rewrite this function as a lambda function like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">add</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">add_name2</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Although this is not the intended use of the lambda function, we can call it now in the same way we did above with a regular function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">full_name2</span> <span class="o">=</span> <span class="n">add_name2</span><span class="p">(</span><span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">full_name2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>William Mattingly
 </pre></div>
 </div>
 </div>
@@ -458,7 +488,7 @@ Why are lambda functions useful?</p>
 </section>
 <section id="using-lambda-functions-with-our-example-lines">
 <h2>Using lambda functions with our example lines<a class="headerlink" href="#using-lambda-functions-with-our-example-lines" title="Permalink to this heading">#</a></h2>
-<p>Let’s say we have the following list of lines from a poem:</p>
+<p>The more common way to use lambda is to pass the lambda function to another function. You will often hear the term <strong>higher-order function</strong> in this scenario. A higher-order function is a function that can take one function as an input and return either a new function or some other value. When we use lambda in real scenarios, we often pass this anonymous function to a higher-order function in order to simplify our code. Let’s consider a few examples with the lines from “The Raven” by Edgar Alan Poe.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lines</span> <span class="o">=</span> <span class="p">[</span>
@@ -474,6 +504,27 @@ Why are lambda functions useful?</p>
 <section id="example-1-counting-words-in-each-line">
 <h3>Example 1: Counting words in each line<a class="headerlink" href="#example-1-counting-words-in-each-line" title="Permalink to this heading">#</a></h3>
 <p>Let’s use a <code class="docutils literal notranslate"><span class="pre">lambda</span></code> function to count the number of words in each line. We can achieve this using the <code class="docutils literal notranslate"><span class="pre">map()</span></code> function, which applies a given function to each item in an iterable (like a list).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">map</span></code> function is a higher-order function. In the previous tutorial, we saw that takes a function and an iterable as input, and returns a new iterable that contains the result of applying the function to each element of the original iterable.</p>
+<p>Here’s an implementation of the map function in Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">map</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">iterable</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p>We can pass our anonymous lambda function to this map function. In this case, our lambda function will split each line and then count the length of each line. As a regular function, this would look like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">count_words</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">count_words_in_line</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+    <span class="n">word_count</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+        <span class="n">word_count</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">count_words_in_line</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">word_count</span>
+</pre></div>
+</div>
+<p>In this code, the <code class="docutils literal notranslate"><span class="pre">count_words</span></code> function takes a list of strings <code class="docutils literal notranslate"><span class="pre">lines</span></code> as input and returns a list of integers representing the number of words in each line. The <code class="docutils literal notranslate"><span class="pre">count_words_in_line</span></code> function takes a single line as input and returns the number of words in that line. The <code class="docutils literal notranslate"><span class="pre">count_words</span></code> function uses a for loop to apply the <code class="docutils literal notranslate"><span class="pre">count_words_in_line</span></code> function to each line in lines and append the result to the <code class="docutils literal notranslate"><span class="pre">word_count</span></code> list.</p>
+<p>This complex function can be reduced to a single line by leveraging <code class="docutils literal notranslate"><span class="pre">map</span></code> and <code class="docutils literal notranslate"><span class="pre">lambda</span></code> functions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">word_count</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()),</span> <span class="n">lines</span><span class="p">)</span>
@@ -515,6 +566,96 @@ While I nodded, nearly napping, suddenly there came a tapping,
 <p>Here, <code class="docutils literal notranslate"><span class="pre">lambda</span> <span class="pre">line:</span> <span class="pre">len(line)</span></code> is a lambda function that takes a single argument line and returns its length.</p>
 <p>While not essential in code, <code class="docutils literal notranslate"><span class="pre">lambda</span></code> functions can reduce the need to have functions for functional code that may only have a single use in your code. Lambda functions are a powerful tool for writing concise and elegant code. They can be especially useful for humanists working with text data, as they allow for quick and simple manipulation of strings and lists.</p>
 </section>
+</section>
+<section id="live-coding">
+<h2>Live Coding<a class="headerlink" href="#live-coding" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_add</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lines</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Once upon a midnight dreary, while I pondered, weak and weary,&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Over many a quaint and curious volume of forgotten lore—&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;While I nodded, nearly napping, suddenly there came a tapping,&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;As of some one gently rapping, rapping at my chamber door.&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>    <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()),</span> <span class="n">lines</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[11, 10, 10, 11]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">count_line_lengths</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">count_line_lengths</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11
+10
+10
+11
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -585,13 +726,14 @@ While I nodded, nearly napping, suddenly there came a tapping,
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-lambda-functions">What are lambda functions?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-lambda-functions">What are Lambda Functions?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-syntax">Basic syntax</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-lambda-functions-with-our-example-lines">Using lambda functions with our example lines</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-counting-words-in-each-line">Example 1: Counting words in each line</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-sorting-lines-by-length">Example 2: Sorting lines by length</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#live-coding">Live Coding</a></li>
 </ul>
   </nav></div>
 
