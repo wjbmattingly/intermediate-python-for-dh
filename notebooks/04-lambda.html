@@ -159,6 +159,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="06-generators.html">Generators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07-collector.html">Collector from Collections</a></li>
 <li class="toctree-l1"><a class="reference internal" href="08-comprehension.html">Comprehension with Sequences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="100-keybert.html">How to Find Keywords in Texts Easily with Python, KeyBERT, and Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson.html">How to Find Keywords in Texts Easily with Python, KeyBERT, and Machine Learning</a></li>
 </ul>
 
     </div>
@@ -543,7 +545,8 @@ Why are lambda functions useful?</p>
 </section>
 <section id="example-2-sorting-lines-by-length">
 <h3>Example 2: Sorting lines by length<a class="headerlink" href="#example-2-sorting-lines-by-length" title="Permalink to this heading">#</a></h3>
-<p>We can use a <code class="docutils literal notranslate"><span class="pre">lambda</span></code> function to sort the lines based on their length. The <code class="docutils literal notranslate"><span class="pre">sorted()</span></code> function can take a key argument, which is a function that defines how to sort the items.</p>
+<p>Another common usage of <code class="docutils literal notranslate"><span class="pre">lambda</span></code> is to use with the <code class="docutils literal notranslate"><span class="pre">sorted()</span></code> function. We can use a <code class="docutils literal notranslate"><span class="pre">lambda</span></code> function in the example below to sort the lines based on their length. The <code class="docutils literal notranslate"><span class="pre">sorted()</span></code> function can take a key argument, which is a function that defines how to sort the items. In this case, our <code class="docutils literal notranslate"><span class="pre">lambda</span></code> function will be the function that we pass to the <code class="docutils literal notranslate"><span class="pre">key</span></code> argument.</p>
+<p>In the example below, we use <code class="docutils literal notranslate"><span class="pre">lambda</span></code> to sort the lines by their length.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sorted_lines</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>

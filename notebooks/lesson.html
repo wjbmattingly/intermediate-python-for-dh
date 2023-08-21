@@ -1,0 +1,741 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>How to Find Keywords in Texts Easily with Python, KeyBERT, and Machine Learning &#8212; Intermediate Python for Humanists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/lesson';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="How to Find Keywords in Texts Easily with Python, KeyBERT, and Machine Learning" href="100-keybert.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Intermediate Python for Humanists</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Intermediate Python for Humanists
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01-enumerate.html">The Enumerate Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-zip.html">The Zip Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-map.html">The Map Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-lambda.html">Lambda Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-filter.html">The Filter Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-generators.html">Generators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-collector.html">Collector from Collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-comprehension.html">Comprehension with Sequences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="100-keybert.html">How to Find Keywords in Texts Easily with Python, KeyBERT, and Machine Learning</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">How to Find Keywords in Texts Easily with Python, KeyBERT, and Machine Learning</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/wjbmattingly/intermediate-python-for-dh/blob/main/notebooks/lesson.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/wjbmattingly/intermediate-python-for-dh" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/wjbmattingly/intermediate-python-for-dh/edit/main/notebooks/lesson.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/wjbmattingly/intermediate-python-for-dh/issues/new?title=Issue%20on%20page%20%2Fnotebooks/lesson.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/lesson.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>How to Find Keywords in Texts Easily with Python, KeyBERT, and Machine Learning</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video">Video</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-keybert">Why use KeyBERT?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-it-work">How does it work?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-and-setup">Installation and Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-texts">Preparing the Texts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="how-to-find-keywords-in-texts-easily-with-python-keybert-and-machine-learning">
+<h1>How to Find Keywords in Texts Easily with Python, KeyBERT, and Machine Learning<a class="headerlink" href="#how-to-find-keywords-in-texts-easily-with-python-keybert-and-machine-learning" title="Permalink to this heading">#</a></h1>
+<p><img alt="keybert" src="https://github.com/MaartenGr/KeyBERT/raw/master/images/logo.png" /></p>
+<p>KeyBERT is a minimal and efficient keyword extraction technique that leverages BERT embeddings. It can be used to extract keywords from text and is particularly useful for summarizing and categorizing large datasets. Digital humanists may find KeyBERT beneficial in their research for understanding key themes, characters, or ideas in textual data.</p>
+<section id="video">
+<h2>Video<a class="headerlink" href="#video" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="why-use-keybert">
+<h2>Why use KeyBERT?<a class="headerlink" href="#why-use-keybert" title="Permalink to this heading">#</a></h2>
+<p>KeyBERT allows individuals to easily capture the keywords of a document with minimal code.</p>
+</section>
+<section id="how-does-it-work">
+<h2>How does it work?<a class="headerlink" href="#how-does-it-work" title="Permalink to this heading">#</a></h2>
+<p>KeyBERT works by taking an input text. It then vectorizes the text with a BERT model of your choosing. Next, it compares the vector of each word in the text to the vector of the document as a whole. In doing so, KeyBERT effectively has a measure of how similar ran individual word is to the document; in other words, it knows the relevance of each word to the document as whole. Like other keyword extraction methods, this works with the presumption that the words that are most similar to the document are the keywords, or potential subjects of the text.</p>
+</section>
+<section id="installation-and-setup">
+<h2>Installation and Setup<a class="headerlink" href="#installation-and-setup" title="Permalink to this heading">#</a></h2>
+<p>Before using KeyBERT, you’ll need to install the package. You can install it using pip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>keybert
+</pre></div>
+</div>
+</section>
+<section id="preparing-the-texts">
+<h2>Preparing the Texts<a class="headerlink" href="#preparing-the-texts" title="Permalink to this heading">#</a></h2>
+<p>For this lesson, we’ll use three random sections of the book <code class="docutils literal notranslate"><span class="pre">Dracula</span></code> by Bram Stoker.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text1</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&quot;</span>
+<span class="s2">Presently the horses began to scream, and tore at their tethers till I</span>
+<span class="s2">came to them and quieted them. When they did feel my hands on them, they</span>
+<span class="s2">whinnied low as in joy, and licked at my hands and were quiet for a</span>
+<span class="s2">time. Many times through the night did I come to them, till it arrive to</span>
+<span class="s2">the cold hour when all nature is at lowest; and every time my coming was</span>
+<span class="s2">with quiet of them. In the cold hour the fire began to die, and I was</span>
+<span class="s2">about stepping forth to replenish it, for now the snow came in flying</span>
+<span class="s2">sweeps and with it a chill mist. Even in the dark there was a light of</span>
+<span class="s2">some kind, as there ever is over snow; and it seemed as though the</span>
+<span class="s2">snow-flurries and the wreaths of mist took shape as of women with</span>
+<span class="s2">trailing garments. All was in dead, grim silence only that the horses</span>
+<span class="s2">whinnied and cowered, as if in terror of the worst. I began to</span>
+<span class="s2">fear--horrible fears; but then came to me the sense of safety in that</span>
+<span class="s2">ring wherein I stood. I began, too, to think that my imaginings were of</span>
+<span class="s2">the night, and the gloom, and the unrest that I have gone through, and</span>
+<span class="s2">all the terrible anxiety. It was as though my memories of all Jonathan’s</span>
+<span class="s2">horrid experience were befooling me; for the snow flakes and the mist</span>
+<span class="s2">began to wheel and circle round, till I could get as though a shadowy</span>
+<span class="s2">glimpse of those women that would have kissed him. And then the horses</span>
+<span class="s2">cowered lower and lower, and moaned in terror as men do in pain. Even</span>
+<span class="s2">the madness of fright was not to them, so that they could break away. I</span>
+<span class="s2">feared for my dear Madam Mina when these weird figures drew near and</span>
+<span class="s2">circled round. I looked at her, but she sat calm, and smiled at me; when</span>
+<span class="s2">I would have stepped to the fire to replenish it, she caught me and held</span>
+<span class="s2">me back, and whispered, like a voice that one hears in a dream, so low</span>
+<span class="s2">it was:--</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<span class="n">text2</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&quot;</span>
+<span class="s2">I only slept a few hours when I went to bed, and feeling that I could</span>
+<span class="s2">not sleep any more, got up. I had hung my shaving glass by the window,</span>
+<span class="s2">and was just beginning to shave. Suddenly I felt a hand on my shoulder,</span>
+<span class="s2">and heard the Count’s voice saying to me, “Good-morning.” I started, for</span>
+<span class="s2">it amazed me that I had not seen him, since the reflection of the glass</span>
+<span class="s2">covered the whole room behind me. In starting I had cut myself slightly,</span>
+<span class="s2">but did not notice it at the moment. Having answered the Count’s</span>
+<span class="s2">salutation, I turned to the glass again to see how I had been mistaken.</span>
+<span class="s2">This time there could be no error, for the man was close to me, and I</span>
+<span class="s2">could see him over my shoulder. But there was no reflection of him in</span>
+<span class="s2">the mirror! The whole room behind me was displayed; but there was no</span>
+<span class="s2">sign of a man in it, except myself. This was startling, and, coming on</span>
+<span class="s2">the top of so many strange things, was beginning to increase that vague</span>
+<span class="s2">feeling of uneasiness which I always have when the Count is near; but at</span>
+<span class="s2">the instant I saw that the cut had bled a little, and the blood was</span>
+<span class="s2">trickling over my chin. I laid down the razor, turning as I did so half</span>
+<span class="s2">round to look for some sticking plaster. When the Count saw my face, his</span>
+<span class="s2">eyes blazed with a sort of demoniac fury, and he suddenly made a grab at</span>
+<span class="s2">my throat. I drew away, and his hand touched the string of beads which</span>
+<span class="s2">held the crucifix. It made an instant change in him, for the fury passed</span>
+<span class="s2">so quickly that I could hardly believe that it was ever there.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">text3</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&quot;</span>
+<span class="s2">I knew that there were at least three graves to find--graves that are</span>
+<span class="s2">inhabit; so I search, and search, and I find one of them. She lay in her</span>
+<span class="s2">Vampire sleep, so full of life and voluptuous beauty that I shudder as</span>
+<span class="s2">though I have come to do murder. Ah, I doubt not that in old time, when</span>
+<span class="s2">such things were, many a man who set forth to do such a task as mine,</span>
+<span class="s2">found at the last his heart fail him, and then his nerve. So he delay,</span>
+<span class="s2">and delay, and delay, till the mere beauty and the fascination of the</span>
+<span class="s2">wanton Un-Dead have hypnotise him; and he remain on and on, till sunset</span>
+<span class="s2">come, and the Vampire sleep be over. Then the beautiful eyes of the fair</span>
+<span class="s2">woman open and look love, and the voluptuous mouth present to a</span>
+<span class="s2">kiss--and man is weak. And there remain one more victim in the Vampire</span>
+<span class="s2">fold; one more to swell the grim and grisly ranks of the Un-Dead!...</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
+<p>Now that we have our texts, let’s go ahead and import the <code class="docutils literal notranslate"><span class="pre">KeyBERT</span></code> class.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">keybert</span> <span class="kn">import</span> <span class="n">KeyBERT</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we can instantiate the class. By default, we will use the <code class="docutils literal notranslate"><span class="pre">all-MiniLM-L6-v2</span></code> transformer. You can use others available from the <code class="docutils literal notranslate"><span class="pre">sentence-transformers</span></code> library. You can even use models from Flair, Gensim and spaCy. Since we will not be passing any keyword arguments, we are using the <code class="docutils literal notranslate"><span class="pre">all-MiniLM-L6-v2</span></code> in the example below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">KeyBERT</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With our model loaded, we can now extract the keywords. To do this, we only need to pass the text to the model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">extract_keywords</span><span class="p">(</span><span class="n">text1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;horses&#39;, 0.4038),
+ (&#39;gloom&#39;, 0.3456),
+ (&#39;fears&#39;, 0.3123),
+ (&#39;snow&#39;, 0.3074),
+ (&#39;fright&#39;, 0.2953)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Pretty cool, right? Our output is a list of tuples. Each tuple has a keyword and its similarity score to the document. We can even pass a keyword argument: <code class="docutils literal notranslate"><span class="pre">keyphrase_ngram_range</span></code>. This let’s us specify if we will allow ngrams, such as bigrams or trigramsm. It expects a tuple with the lower ngram and the higher ngram.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">extract_keywords</span><span class="p">(</span><span class="n">text1</span><span class="p">,</span> <span class="n">keyphrase_ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;horses began scream&#39;, 0.4998),
+ (&#39;grim silence horses&#39;, 0.4989),
+ (&#39;horses whinnied cowered&#39;, 0.4751),
+ (&#39;silence horses whinnied&#39;, 0.4713),
+ (&#39;horses whinnied&#39;, 0.4546)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also pass stop words to the model to remove them. Stop words are words that are very ubiquitous and sometimes throw off models.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">extract_keywords</span><span class="p">(</span><span class="n">text1</span><span class="p">,</span> <span class="n">keyphrase_ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">stop_words</span><span class="o">=</span><span class="s2">&quot;english&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;horses whinnied&#39;, 0.4546),
+ (&#39;silence horses&#39;, 0.4493),
+ (&#39;horses began&#39;, 0.4117),
+ (&#39;horses&#39;, 0.4038),
+ (&#39;horses cowered&#39;, 0.3993)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>To visualize the data, we can pass the keyword argument <code class="docutils literal notranslate"><span class="pre">highlight</span></code>. This is a great way to visualize the data in a notebook.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">extract_keywords</span><span class="p">(</span><span class="n">text2</span><span class="p">,</span> <span class="n">highlight</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">only <span style="color: #000000; text-decoration-color: #000000; background-color: #ffff00">slept</span> few hours when went to bed and feeling that could not sleep any more got up had hung my <span style="color: #000000; text-decoration-color: #000000; background-color: #ffff00">shaving</span> glass by
+the window and was just beginning to <span style="color: #000000; text-decoration-color: #000000; background-color: #ffff00">shave</span> Suddenly felt hand on my shoulder and heard the Count voice saying to me
+Good morning started for it amazed me that had not seen him since the reflection of the glass covered the whole 
+room behind me In starting had cut myself slightly but did not notice it at the moment Having answered the Count 
+salutation turned to the glass again to see how had been mistaken This time there could be no error for the man was
+close to me and could see him over my shoulder But there was no reflection of him in the mirror The whole room 
+behind me was displayed but there was no sign of man in it except myself This was <span style="color: #000000; text-decoration-color: #000000; background-color: #ffff00">startling</span> and coming on the top 
+of so many strange things was beginning to increase that vague feeling of uneasiness which always have when the 
+Count is near but at the instant <span style="color: #000000; text-decoration-color: #000000; background-color: #ffff00">saw</span> that the cut had bled little and the blood was trickling over my chin laid 
+down the razor turning as did so half round to look for some sticking plaster When the Count <span style="color: #000000; text-decoration-color: #000000; background-color: #ffff00">saw</span> my face his eyes 
+blazed with sort of demoniac fury and he suddenly made grab at my throat drew away and his hand touched the string 
+of beads which held the crucifix It made an instant change in him for the fury passed so quickly that could hardly 
+believe that it was ever there
+</pre>
+</div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;shave&#39;, 0.3691),
+ (&#39;shaving&#39;, 0.3665),
+ (&#39;startling&#39;, 0.3437),
+ (&#39;slept&#39;, 0.3282),
+ (&#39;saw&#39;, 0.2966)]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="100-keybert.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">How to Find Keywords in Texts Easily with Python, KeyBERT, and Machine Learning</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video">Video</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-keybert">Why use KeyBERT?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-it-work">How does it work?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-and-setup">Installation and Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-texts">Preparing the Texts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By William J.B. Mattingly
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
