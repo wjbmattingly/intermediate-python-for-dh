@@ -28,7 +28,7 @@ jobs:
         jupyter-book build .
     # Push the book's HTML to github-pages
     - name: GitHub Pages action
-      uses: peaceiris/actions-gh-pages@v3
+      uses: peaceiris/actions-gh-pages@v3.9.3
       with:
         github_token: ${{ secrets.BOOK_TOKEN }}
         publish_dir: ./_build/html
